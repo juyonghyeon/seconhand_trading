@@ -21,6 +21,7 @@ spring:
     multipart:
       maxFileSize: 20MB
       maxRequestSize: 60MB
+      fileSizeThreshold: 30MB
 
 
 # 로깅 설정
