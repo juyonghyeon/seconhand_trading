@@ -10,7 +10,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @Data
 @Table("MEMBER")
 public class Member extends BaseEntity {
-
     @Id
     private Long seq;
     private String email;
