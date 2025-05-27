@@ -3,6 +3,7 @@ package org.koreait.member.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.libs.Utils;
+import org.koreait.member.service.JoinService;
 import org.koreait.member.validators.JoinValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class MemberController {
 
     private final Utils utils;
     private final JoinValidator joinValidator;
+    private final JoinService joinService;
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
@@ -47,6 +49,8 @@ public class MemberController {
         if (errors.hasErrors()) {
             return utils.tpl("member/join");
         }
+
+        joinService.process(form);
 
         // 회원가입 성공시
         return "redirect:/member/login";
