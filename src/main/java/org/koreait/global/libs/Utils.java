@@ -2,14 +2,20 @@ package org.koreait.global.libs;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.LocaleResolver;
+
+import java.util.Locale;
 
 @Component
 @RequiredArgsConstructor
 public class Utils {
 
     private final HttpServletRequest request;
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
 
     /**
      * CSS, JS 버전
@@ -46,5 +52,16 @@ public class Utils {
     public String tpl(String path) {
         String prefix = isMobile() ? "mobile" : "front";
         return String.format("%s/%s", prefix, path);
+    }
+
+    /**
+     * 메세지를 코드로 조회
+     * @param code
+     * @return
+     */
+    public String getMessage(String code) {
+        Locale locale = localeResolver.resolveLocale(request);
+
+        return messageSource.getMessage(code, null, locale);
     }
 }
