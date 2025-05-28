@@ -59,6 +59,10 @@ public class MemberController {
     public String login(@ModelAttribute RequestLogin form, Model model) {
         commonProcess("login", model);
 
+        boolean result = false;
+
+
+
         return utils.tpl("member/login");
     }
 

@@ -3,6 +3,7 @@ package org.koreait.global.advices;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.exceptions.CommonException;
+import org.koreait.global.exceptions.script.AlertException;
 import org.koreait.global.libs.Utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,11 +24,21 @@ public class CommonControllerAdvice {
         Map<String, String> data = new HashMap<>();
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR; // 500
         String message = e.getMessage();
+        String tpl = "error/common";
 
         if (e instanceof CommonException commonException) {
             status = commonException.getStatus();
             if (commonException.isErrorCode()) { // 메세지 코드로 메세지를 가져와야 하는 경우
                 message = utils.getMessage(message);
+            }
+
+            // 자바스크립트 alert 형태로 출력하는 예외
+            if (e instanceof AlertException) {
+                tpl = "common/_execute_script";
+
+                String script = String.format("alert('%s');", message);
+
+                data.put("script",script);
             }
         }
 
@@ -39,7 +50,7 @@ public class CommonControllerAdvice {
         ModelAndView mv = new ModelAndView();
         mv.setStatus(status);
         mv.addAllObjects(data);
-        mv.setViewName("error/common");
+        mv.setViewName(tpl);
 
         e.printStackTrace();
 
