@@ -13,11 +13,11 @@
                 <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
             </li>
             <li>
-                <input type="password" name="password" th:field="*{password}" th:palcehoder="#{비밀번호}">
+                <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀번호}">
                 <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
             </li>
             <li>
-                <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:palcehoder="#{비밀번호_확인}">
+                <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
                 <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
             </li>
             <li>
@@ -33,7 +33,7 @@
         <h3 th:text="#{약관동의}"></h3>
         <div class="terms">약관...</div>
         <input type="checkbox" name="termsAgree" th:field="*{termsAgree}" id="terms-agree">
-        <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
+        <label for="terms-agree" th:text="#{회원가입_약관에_동의합니다}"></label>
         <div class="error" th:each="err : ${#fields.errors('termsAgree')}" th:text="${err}"></div>
 
         <button type="submit" th:text="#{가입하기}"></button>

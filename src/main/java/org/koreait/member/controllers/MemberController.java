@@ -5,14 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.koreait.global.libs.Utils;
 import org.koreait.member.service.JoinService;
 import org.koreait.member.validators.JoinValidator;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +39,7 @@ public class MemberController {
 
     // 회원가입 처리
     @PostMapping("/join")
+    @ResponseStatus(HttpStatus.CREATED) // 응답 코드 201
     public String joinPs(@Valid RequestJoin form, Errors errors, Model model) {
         commonProcess("join", model);
 
