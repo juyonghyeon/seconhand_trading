@@ -37,17 +37,19 @@ public class CommonControllerAdvice {
             // 자바스크립트 alert 형태로 출력하는 예외
             if (e instanceof AlertException) {
                 tpl = "common/_execute_script";
-                String script = String.format("alert('%s');", message);
+                String callback = "";
 
                 // history.back() 추가
                 if (e instanceof AlertBackException alertBackException) {
-                    script += String.format("s.history.back();", alertBackException.getTarget());
+                    callback = String.format("() => s.history.back()", alertBackException.getTarget());
                 }
 
                 // location.replace(...) 추가
                 if (e instanceof AlertRedirectException redirectException) {
-                    script += String.format("%s.location.replace('%s');", redirectException.getTarget(), request.getContextPath() + redirectException.getUrl());
+                    callback = String.format("() => %s.location.replace('%s')", redirectException.getTarget(), request.getContextPath() + redirectException.getUrl());
                 }
+
+                String script = String.format("alert('%s', %s);", message, callback);
 
                 data.put("script", script);
             }
