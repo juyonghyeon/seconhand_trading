@@ -2,8 +2,9 @@ package org.koreait.member.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.koreait.global.exceptions.script.AlertRedirectException;
 import org.koreait.global.libs.Utils;
-import org.koreait.member.service.JoinService;
+import org.koreait.member.services.JoinService;
 import org.koreait.member.validators.JoinValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -60,8 +61,9 @@ public class MemberController {
         commonProcess("login", model);
 
         boolean result = false;
-
-
+        if (!result) {
+            throw new AlertRedirectException("예외 발생 테스트", "/member/join");
+        }
 
         return utils.tpl("member/login");
     }

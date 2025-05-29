@@ -7,6 +7,7 @@ public class UnAuthorizedException extends CommonException {
         this("UnAuthorized");
         setErrorCode(true);
     }
+
     public UnAuthorizedException(String message) {
         super(message, HttpStatus.UNAUTHORIZED);
     }

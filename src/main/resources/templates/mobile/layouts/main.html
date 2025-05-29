@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" th:content="${@utils.keywords()}">
-    <meta name="dscription" th:content="${@utils.description()}">
-    <meta name="viewport" content="width=device-width, user-scalable=yes,initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0">
+    <meta name="description" th:content="${@utils.description()}">
+    <meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1.0,maximum-scale=2.0,minimum-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/common/css/style.css?v={v}(v=${@utils.version()})}">
     <link rel="stylesheet" type="text/css" th:each="cssFile : ${addCommonCss}"
           th:href="@{/common/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
@@ -16,6 +16,7 @@
           th:href="@{/mobile/css/{css}.css?v={v}(css=${cssFile}, v=${@utils.version()})}">
     <th:block layout:fragment="addCss"></th:block>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script th:src="@{/common/js/common.js?v={v}(v=${@utils.version()})}"></script>
     <script th:each="jsFile : ${addCommonScript}" th:src="@{/common/js/{js}.js?v={v}(js=${jsFile}, v=${@utils.version()})}"></script>
     <th:block layout:fragment="addCommonScript"></th:block>

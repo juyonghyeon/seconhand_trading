@@ -1,4 +1,4 @@
-package org.koreait.member.service;
+package org.koreait.member.services;
 
 import lombok.RequiredArgsConstructor;
 import org.koreait.member.controllers.RequestJoin;
@@ -15,9 +15,9 @@ import org.springframework.util.StringUtils;
 @RequiredArgsConstructor
 public class JoinService {
 
+    private final ModelMapper modelMapper;
     private final PasswordEncoder encoder;
     private final MemberRepository repository;
-    private final ModelMapper modelMapper;
 
     public void process(RequestJoin form) {
         /**
@@ -26,6 +26,7 @@ public class JoinService {
          *      - 숫자만 남기고 다 제거
          * 3. DB에 영구 저장
          */
+
         String hash = encoder.encode(form.getPassword());
         String mobile = form.getMobile();
         if (StringUtils.hasText(mobile)) {

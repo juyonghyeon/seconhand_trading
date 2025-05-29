@@ -9,8 +9,8 @@ public class CommonException extends RuntimeException {
     private final HttpStatus status;
     private boolean errorCode;
 
-    public CommonException(String message, HttpStatus status){
+    public CommonException(String message, HttpStatus status) {
         super(message);
-        this.status =status;
+        this.status = status;
     }
 }
