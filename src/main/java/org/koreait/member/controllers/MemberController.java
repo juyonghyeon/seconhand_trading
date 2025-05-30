@@ -3,6 +3,7 @@ package org.koreait.member.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.libs.Utils;
+import org.koreait.member.libs.MemberUtil;
 import org.koreait.member.services.JoinService;
 import org.koreait.member.validators.JoinValidator;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class MemberController {
     private final Utils utils;
     private final JoinValidator joinValidator;
     private final JoinService joinService;
+    private final MemberUtil memberUtil;
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
@@ -60,7 +62,7 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login(@ModelAttribute RequestLogin form,Errors errors, Model model) {
+    public String login(@ModelAttribute RequestLogin form, Errors errors, Model model) {
         commonProcess("login", model);
 
         /* 검증 실패 처리 S */
@@ -71,6 +73,7 @@ public class MemberController {
                 String[] value = s.split("_");
                 errors.rejectValue(value[0], value[1]);
             });
+
         }
         List<String> globalErrors = form.getGlobalErrors();
         if (globalErrors != null) {
@@ -83,12 +86,14 @@ public class MemberController {
 
     /**
      * 비밀번호 만료시 변경 페이지
+     *
      * @param model
      * @return
      */
     @GetMapping("/password")
-    public String password(Model model){
+    public String password(Model model) {
         commonProcess("password", model);
+
         return utils.tpl("member/password");
     }
 
@@ -117,4 +122,31 @@ public class MemberController {
         model.addAttribute("addScript", addScript);
         model.addAttribute("pageTitle", pageTitle);
     }
+
+//    @ResponseBody
+//    @GetMapping("/test")
+//    public void test(Principal principal) {
+//        String email = principal.getName();
+//        System.out.println("email:" + email);
+//    }
+
+//    @ResponseBody
+//    @GetMapping("/test")
+//    public void test(@AuthenticationPrincipal MemberInfo memberInfo) {
+//        System.out.println("memberInfo:" + memberInfo);
+//    }
+
+//    @ResponseBody
+//    @GetMapping("/test")
+//    public void test() {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        System.out.println("인증상태:" + auth.isAuthenticated());
+//        System.out.println("Principle:" + auth.getPrincipal());
+//    }
+
+//    @ResponseBody
+//    @GetMapping("/test")
+//    public void test() {
+//        System.out.printf("로그인:%s, 관리자여부:%s, 회원정보:%s%n", memberUtil.isLogin(), memberUtil.isAdmin(), memberUtil.getMember());
+//    }
 }
