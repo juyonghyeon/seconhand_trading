@@ -57,7 +57,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(c -> {
             c.requestMatchers("/mypage/**").authenticated()
                     .requestMatchers("/member/join","/member/join").anonymous()
-                    .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                    // .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                     .anyRequest().permitAll();
         });
 
