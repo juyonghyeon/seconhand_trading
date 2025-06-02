@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-scurity">
     <header th:fragment="common">
         <div class="top">
             <div class="left">
@@ -10,6 +11,7 @@
                     <a th:href="@{/mypage}" th:text="${#messages.msg('LOGIN_MSG',loggedMember.name, loggedMember.email)}"></a>
                     <a th:href="@{/mypage}" th:text="#{마이페이지}"></a>
                     <a th:href="@{/logout}" th:text="#{로그아웃}"></a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" th:text="#{사이트_관리}"></a>
                 </th:block>
                 <th:block th:unless="${isLogin}">
                     <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
