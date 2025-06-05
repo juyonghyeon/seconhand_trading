@@ -38,7 +38,7 @@ public class TrendController extends CommonController {
     }
 
     @GetMapping("/etc")
-    public String etc(Model model) {
+    public String etc(@ModelAttribute TrendSearch search, Model model) {
         commonProcess("etc", model);
 
         return "admin/trend/etc";
