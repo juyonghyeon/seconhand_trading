@@ -39,8 +39,9 @@ file:
     url: ${file.url}
     path: ${file.path}
 
+
 # 파이썬 설정
 python:
   path:
-    base: ${python.dir}
-    trend: ${python.trend
+    base: ${python.base}
+    trend: ${python.trend}

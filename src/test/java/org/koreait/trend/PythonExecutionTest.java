@@ -14,6 +14,7 @@ public class PythonExecutionTest {
         Process process = builder.start(); // 명령어 실행
         int statusCode = process.waitFor();
         if (statusCode != 0) return; // 정상 실행이 아닌 경우 다음 실행 X
+
         builder = new ProcessBuilder("C:/trend/.venv/Scripts/python.exe", "C:/trend/trend.py", "C:/uploads/trend");
         process = builder.start();
         statusCode = process.waitFor();
@@ -21,7 +22,6 @@ public class PythonExecutionTest {
             process.inputReader().lines().forEach(System.out::println);
             return;
         }
-        System.out.println("statusCode:" + statusCode);
         BufferedReader br = process.errorReader();
         br.lines().forEach(System.out::println);
     }
