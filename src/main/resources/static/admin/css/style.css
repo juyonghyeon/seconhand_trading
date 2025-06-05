@@ -1,12 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
-
 * {
     box-sizing: border-box;
     outline: none;
     font-family: "Nanum Gothic", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-
 }
 
 html {
@@ -19,7 +15,7 @@ body {
 }
 
 a {
-    color: #000
+    color: #000;
     text-decoration: none;
 }
 
@@ -32,7 +28,6 @@ ol, ul {
 li, dl, dt, dd {
     padding: 0;
     margin: 0;
-
 }
 
 img {
@@ -45,6 +40,7 @@ header {
     background: #fff;
     border-bottom: 3px solid #000;
 }
+
 main {
     display: flex;
 }
