@@ -41,5 +41,6 @@ public class JoinService {
         member.setCredentialChangedAt(LocalDateTime.now());
 
         repository.save(member);
+
     }
 }

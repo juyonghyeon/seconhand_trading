@@ -24,6 +24,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session = request.getSession();
         RequestLogin form = (RequestLogin) session.getAttribute("requestLogin");
         form = Objects.requireNonNullElseGet(form, RequestLogin::new);
+
         String redirectUrl = form.getRedirectUrl();
         String url = StringUtils.hasText(redirectUrl) ? redirectUrl : "/";
 

@@ -17,10 +17,11 @@ public class CommonInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
             /* 로그인 회원 정보 유지 S */
-            modelAndView.addObject("isLogin",memberUtil.isLogin());
-            modelAndView.addObject("isAdmin",memberUtil.isAdmin());
-            modelAndView.addObject("loggedMember",memberUtil.getMember());
+            modelAndView.addObject("isLogin", memberUtil.isLogin());
+            modelAndView.addObject("isAdmin", memberUtil.isAdmin());
+            modelAndView.addObject("loggedMember", memberUtil.getMember());
             /* 로그인 회원 정보 유지 E */
         }
     }
 }
+

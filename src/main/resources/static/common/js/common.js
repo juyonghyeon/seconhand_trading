@@ -3,9 +3,9 @@ window.alert = function(message, callback) {
     parent.Swal.fire({
       title: message,
       icon: "warning"
-    }).then(()=>{
+    }).then(() => {
         if (typeof callback === 'function') {
-        callback();
+            callback();
         }
     })
 };

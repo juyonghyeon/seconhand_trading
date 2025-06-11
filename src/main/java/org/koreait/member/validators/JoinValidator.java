@@ -17,8 +17,6 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 
     private final MemberRepository repository;
 
-
-
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz.isAssignableFrom(RequestJoin.class);
@@ -26,9 +24,11 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 
     @Override
     public void validate(Object target, Errors errors) {
+
         if (errors.hasErrors()) {
             return;
         }
+
         /**
          * 1. 이메일 중복 여부
          * 2. 비밀번호 복잡성
@@ -42,12 +42,12 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
 
         // 1. 이메일 중복 여부
         if (repository.existsByEmail(form.getEmail())) {
-            errors.rejectValue("email","Duplicated");
+            errors.rejectValue("email", "Duplicated");
         }
 
         // 2. 비밀번호 복잡성
         if (!checkAlpha(password, false) || !checkNumber(password) || !checkSpecialChars(password)) {
-            errors.rejectValue("password","Complexity");
+            errors.rejectValue("password", "Complexity");
         }
 
         // 3. 비밀번호 확인
@@ -55,9 +55,10 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
             errors.rejectValue("confirmPassword", "Mismatch");
         }
 
-        // 4. 휴대폰번호형식 검증
+        // 4. 휴대폰번호 형식 검증
         if (!checkMobile(mobile)) {
             errors.rejectValue("mobile", "Format");
         }
+
     }
 }

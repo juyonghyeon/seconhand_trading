@@ -16,5 +16,4 @@ public class MypageController {
     public String index() {
         return utils.tpl("mypage/index");
     }
-
 }

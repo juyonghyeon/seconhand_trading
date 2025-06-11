@@ -19,10 +19,11 @@ public class BeanConfig {
         return mapper;
     }
 
+    @Lazy
+    @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper om = new ObjectMapper();
         om.registerModule(new JavaTimeModule()); // java.time 패키지 대응
-
         return om;
     }
 }

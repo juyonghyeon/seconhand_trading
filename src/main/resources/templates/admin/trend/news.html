@@ -10,9 +10,11 @@
 <section layout:fragment="content" th:object="${item}">
     <h1>오늘의 뉴스 트렌드</h1>
     <img th:src="*{wordCloud}">
-    <div class="Chart-wrap">
-    <canvas id="myChart"></canvas>
+
+    <div class="chart-wrap">
+        <canvas id="myChart"></canvas>
     </div>
+
     <script type="application/json" id="chart-data" th:utext="*{keywords}"></script>
 </section>
 </html>

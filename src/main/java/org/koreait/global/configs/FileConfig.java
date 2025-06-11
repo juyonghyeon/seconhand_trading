@@ -18,4 +18,3 @@ public class FileConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:///" + properties.getPath() + "/");
     }
 }
-

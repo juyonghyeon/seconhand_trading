@@ -10,7 +10,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import java.time.Duration;
 
 /**
- * I18N - Internationalizational : 국제화
+ * I18N - Internationalization : 국제화
+ *
  */
 @Configuration
 public class I18NConfig implements WebMvcConfigurer {
@@ -24,6 +25,7 @@ public class I18NConfig implements WebMvcConfigurer {
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang"); // ?lang=en
+
         return interceptor;
     }
 
@@ -31,6 +33,7 @@ public class I18NConfig implements WebMvcConfigurer {
     public CookieLocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver("lang");
         resolver.setCookieMaxAge(Duration.ofHours(1L));
+
         return resolver;
     }
 }

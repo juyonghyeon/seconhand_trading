@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public class AlertRedirectException extends AlertException {
     private final String target;
-    public final String url;
+    private final String url;
 
     public AlertRedirectException(String message, String url, HttpStatus status, String target) {
         super(message, status);
@@ -19,7 +19,7 @@ public class AlertRedirectException extends AlertException {
     }
 
     public AlertRedirectException(String message, String url, String target) {
-        this(message, url, HttpStatus.BAD_REQUEST);
+        this(message, url, HttpStatus.BAD_REQUEST, target);
     }
 
     public AlertRedirectException(String message, String url) {
