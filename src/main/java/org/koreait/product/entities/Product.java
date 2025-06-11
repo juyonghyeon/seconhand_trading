@@ -15,7 +15,7 @@ public class Product extends BaseEntity {
     private String gid;
     private String name;
     private String category;
-    private ProductStatus status;
+    private ProductStatus status = ProductStatus.READY;
 
     @Column("consumerPrice")
     private int consumerPrice;
