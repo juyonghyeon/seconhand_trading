@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Lazy
 @Service
@@ -52,6 +54,13 @@ public class ProductInfoService {
             }
 
             params.add("%" + skey + "%");
+        }
+
+        List<ProductStatus> productStatuses = search.getStatus();
+        if(productStatuses != null && !productStatuses.isEmpty()) {
+            addWhere.add(" status IN (" + Stream.generate(() -> "?").limit(productStatuses.size()).collect(Collectors.joining(","))+ ")");
+
+            productStatuses.forEach(productStatus -> params.add(productStatus.name()));
         }
 
         StringBuffer sb = new StringBuffer(2000);
@@ -106,3 +115,4 @@ public class ProductInfoService {
     }
 
 }
+
