@@ -28,8 +28,8 @@ public class SecurityConfig {
         });
 
         http.logout(c -> {
-           c.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                   .logoutSuccessUrl("/member/login");
+            c.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/member/login");
         });
         /* 인증 설정 - 로그인, 로그아웃 E */
 
@@ -63,7 +63,7 @@ public class SecurityConfig {
         });
 
         http.exceptionHandling(c -> {
-           c.authenticationEntryPoint(new MemberAuthenticationExceptionHandler()); // 미로그인 상태에서의 인가 실패에 대한 처리
+            c.authenticationEntryPoint(new MemberAuthenticationExceptionHandler()); // 미로그인 상태에서의 인가 실패에 대한 처리
             c.accessDeniedHandler(new MemberAccessDeniedHandler()); // 인증 받은 회원이 권한이 없는 페이지에 접근한 경우
         });
         /* 인가 설정 E */
