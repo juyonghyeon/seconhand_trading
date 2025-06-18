@@ -41,7 +41,7 @@ public class MemberController extends CommonController {
     public String list(@ModelAttribute MemberSearch search, Model model) {
         commonProcess("list", model);
 
-        ListData< Member> data = infoService.getList(search);
+        ListData<Member> data = infoService.getList(search);
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
 

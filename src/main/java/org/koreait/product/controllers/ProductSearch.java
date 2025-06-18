@@ -8,5 +8,5 @@ import java.util.List;
 
 @Data
 public class ProductSearch extends CommonSearch {
-    private List<ProductStatus> status;
+    private List<ProductStatus> productStatus;
 }

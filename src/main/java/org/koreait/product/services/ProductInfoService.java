@@ -56,7 +56,7 @@ public class ProductInfoService {
             params.add("%" + skey + "%");
         }
 
-        List<ProductStatus> productStatuses = search.getStatus();
+        List<ProductStatus> productStatuses = search.getProductStatus();
         if(productStatuses != null && !productStatuses.isEmpty()) {
             addWhere.add(" status IN (" + Stream.generate(() -> "?").limit(productStatuses.size()).collect(Collectors.joining(","))+ ")");
 

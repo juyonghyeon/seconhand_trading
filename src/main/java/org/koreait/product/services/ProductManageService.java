@@ -41,7 +41,6 @@ public class ProductManageService {
                 boolean updateStatus = Boolean.parseBoolean(Objects.requireNonNull(request.getParameter("updateStatus_" + chk), "false"));
                 if (updateStatus) {
                     product.setModifiedAt(LocalDateTime.now());
-
                 }
             }
 
