@@ -8,6 +8,15 @@
     <form name="frmSearch" method="get" th:action="@{/admin/product}" autocomplete="off" th:object="${productSearch}">
         <table class="table-cols">
             <tr>
+                <th width="80">상품상태</th>
+                <td>
+                    <span th:each="stat : ${statusList}" class="checkbox">
+                        <input type="checkbox" name="productStatus" th:value="${stat.name()}" th:id="${'productStatus-' + stat.name()}" th:field="*{productStatus}">
+                        <label th:for="${'productStatus-' + stat.name()}" th:text="${#messages.msg('productStatus.'+stat.name())}"></label>
+                    </span>
+                </td>
+            </tr>
+            <tr>
                 <th>키워드 검색</th>
                 <td class="flex">
                     <select name="sopt" th:field="*{sopt}" class="w180 mr5">
