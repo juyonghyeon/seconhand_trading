@@ -43,11 +43,11 @@
                 </th>
                 <th align="center">상품명</th>
                 <th>카테고리</th>
-                <th>상품상태</th>
                 <th>가격</th>
                 <th>소비자 가격</th>
                 <th>상품 설명</th>
-                <th>상태 변경</th>
+                <th>상품상태</th>
+                <th>비고</th>
             </tr>
             </thead>
             <tbody>
@@ -59,7 +59,6 @@
                 </td>
                 <td th:text="*{name}" align="center"></td>
                 <td th:text="*{category}" align="center"></td>
-                <td th:text="*{status}" align="center"></td>
                 <td th:text="*{salePrice}" align="center"></td>
                 <td th:text="*{consumerPrice}" align="center"></td>
                 <td th:text="*{description}" align="center"></td>
@@ -71,6 +70,15 @@
                                 th:selected="${stat.name() == item.status}">
                         </option>
                     </select>
+                </td>
+                <td align="center">
+                    <th:block th:if="*{deletedAt != null}">
+                        <div class="badge" th:text="*{#strings.concat('삭제(', #temporals.format(deletedAt, 'yy.MM.dd HH:mm'),')')}"></div>
+                        <span class="checkbox">
+                            <input type="checkbox" th:name="${'cancelDelete_' + status.index}" value="true" th:id="${'cancelDelete_' + status.index}">
+                            <label th:for="${'cancelDelete_' + status.index}">삭제 취소</label>
+                        </span>
+                    </th:block>
                 </td>
             </tr>
             <tr th:unless="${items != null && !items.isEmpty()}">

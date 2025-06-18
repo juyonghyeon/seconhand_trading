@@ -42,6 +42,10 @@ public class ProductManageService {
                 if (updateStatus) {
                     product.setModifiedAt(LocalDateTime.now());
                 }
+                boolean restore = Boolean.parseBoolean(Objects.requireNonNull(request.getParameter("restore_" + chk), "false"));
+                if (restore) {
+                    product.setDeletedAt(null); // 삭제 복구
+                }
             }
 
             products.add(product);

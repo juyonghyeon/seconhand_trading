@@ -1,8 +1,8 @@
-window.addEventListener("DOMContentLoaded", function() {
-    // 전체 토글 공통 기능 처리 S
+window.addEventListener("DOMContentLoaded", function () {
+    // 전체 체크 토글
     const chkAlls = document.getElementsByClassName("check-all");
     for (const el of chkAlls) {
-        el.addEventListener("click", function() {
+        el.addEventListener("click", function () {
             const { targetName } = this.dataset;
             const chks = document.getElementsByName(targetName);
             for (const chk of chks) {
@@ -10,18 +10,34 @@ window.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-    // 전체 토글 공통 기능 처리 E
 
-    // 공통 양식 처리 S
+    // 공통 처리 버튼
     const processFormButtons = document.getElementsByClassName("process-form");
     for (const el of processFormButtons) {
-        el.addEventListener("click", function() {
+        el.addEventListener("click", function () {
             const method = this.classList.contains("delete") ? "DELETE" : "PATCH";
             const { formName } = this.dataset;
-            const formEl = document[formName];
-            formEl._method.value = method;
-            alert('정말 처리하겠습니까?', () => formEl.submit());
+            const formEl = document.forms[formName];
+
+            if (!formEl) {
+                console.error("Form not found:", formName);
+                return;
+            }
+
+            // _method input이 없으면 생성
+            let methodInput = formEl.querySelector("input[name=_method]");
+            if (!methodInput) {
+                methodInput = document.createElement("input");
+                methodInput.type = "hidden";
+                methodInput.name = "_method";
+                formEl.appendChild(methodInput);
+            }
+            methodInput.value = method;
+
+            // 확인 후 전송
+            if (confirm("정말 처리하겠습니까?")) {
+                formEl.submit();
+            }
         });
     }
-    // 공통 양식 처리 E
 });

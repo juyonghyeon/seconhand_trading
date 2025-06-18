@@ -3,6 +3,9 @@ package org.koreait.survey.diabetes.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.koreait.global.constants.Gender;
+import org.koreait.survey.diabetes.constants.SmokingHistory;
+import org.koreait.survey.diabetes.controllers.RequestDiabetesSurvey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -29,8 +32,17 @@ public class DiabetesSurveyPredictServiceTest {
 
     @Test
     void test2() {
-        List<Number> item = List.of(1, 46.0, 0.0, 0.0, 3.0, 29.6, 5.8, 130);
-        boolean result = service.isDiabetes(item);
-        System.out.println(result);
+        //List<Number> item = List.of(1, 46.0, 0.0, 0.0, 3, 29.6, 5.8, 130);
+//        List<Number> item = List.of(1, 41, 0, 0, 0,29.6, 8.2, 126);
+//        boolean result = service.isDiabetes(item);
+//        System.out.println(result);
+        RequestDiabetesSurvey form = new RequestDiabetesSurvey();
+        form.setGender(Gender.MALE);
+        form.setAge(41);
+        form.setHypertension(false);
+        form.setHeartDisease(false);
+        form.setSmokingHistory(SmokingHistory.EVER);
+        form.setHeight();
+        form.setWeight(120);
     }
 }

@@ -8,6 +8,7 @@ import org.koreait.product.constants.ProductStatus;
 import org.koreait.product.controllers.ProductSearch;
 import org.koreait.product.entities.Product;
 import org.koreait.product.services.ProductInfoService;
+import org.koreait.product.services.ProductManageService;
 import org.koreait.product.services.ProductUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class ProductController extends CommonController {
 
     private final ProductUpdateService updateService;
     private final ProductInfoService infoService;
+    private final ProductManageService manageService;
 
     @Override
     @ModelAttribute("mainCode")
@@ -63,6 +65,16 @@ public class ProductController extends CommonController {
         form.setStatus(ProductStatus.READY);
 
         return "admin/product/register";
+    }
+
+    // 상품 삭제 및 상태 수정
+    @RequestMapping({"","/list"})
+    public String listPs(@RequestParam(name="chk", required = false) List<Integer> chks, Model model) {
+
+        manageService.processBatch(chks);
+        model.addAttribute("script", "parent_location.reload();");
+
+        return "common/_exectue_script";
     }
 
     // 상품 정보 수정
