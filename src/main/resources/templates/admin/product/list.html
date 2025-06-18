@@ -63,13 +63,7 @@
                 <td th:text="*{consumerPrice}" align="center"></td>
                 <td th:text="*{description}" align="center"></td>
                 <td>
-                    <select th:name="${'status_' + status.index}">
-                        <option th:each="stat : ${statusList}"
-                                th:value="${stat.name()}"
-                                th:text="${#messages.msg('productStatus.' + stat.name())}"
-                                th:selected="${stat.name() == item.status}">
-                        </option>
-                    </select>
+
                 </td>
                 <td align="center">
                     <th:block th:if="*{deletedAt != null}">

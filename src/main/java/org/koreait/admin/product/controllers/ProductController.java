@@ -54,6 +54,7 @@ public class ProductController extends CommonController {
         ListData<Product> data = infoService.getList(search);
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
+        model.addAttribute("item", new RequestProduct());
         return "admin/product/list";
     }
 
