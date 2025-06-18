@@ -4,6 +4,9 @@
       layout:decorate="~{front/layouts/main}">
 
 <main layout:fragment="content">
-    <h1>메인페이지...</h1>
+    <h1 th:text="${pageTitle}"></h1>
+    <form name="frmStep" method="POST" th:action="@{/survey/diabetes/step2}" autocomplete="off">
+
+    </form>
 </main>
 </html>

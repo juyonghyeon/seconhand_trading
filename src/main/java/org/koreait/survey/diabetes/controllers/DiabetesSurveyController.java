@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.libs.Utils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +38,8 @@ public class DiabetesSurveyController {
 
 
     @PostMapping("/step2")
-    public String step2(@Valid RequestDiabetesSurvey form, Errors errors) {
+    public String step2(@Valid RequestDiabetesSurvey form, Errors errors, Model model) {
+        commonProcess("step", model);
         if (errors.hasErrors()) {
             return utils.tpl("survey/diabetes/step1");
         }
@@ -53,7 +56,8 @@ public class DiabetesSurveyController {
      * @return
      */
     @PostMapping("/process")
-    public String process(@Valid RequestDiabetesSurvey form, Errors errors) {
+    public String process(@Valid RequestDiabetesSurvey form, Errors errors, Model model) {
+        commonProcess("step", model);
 
         if (errors.hasErrors()) {
             return utils.tpl("survey/diabetes/step2");
@@ -66,9 +70,28 @@ public class DiabetesSurveyController {
      * 설문 결과 보기
      */
     @GetMapping("/result/{seq}")
-    public String result(@PathVariable("seq") Long seq) {
+    public String result(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("step", model);
 
 
         return utils.tpl("survey/diabetes/result");
+    }
+
+    /**
+     * 컨트롤러 공통 처리
+     * @param mode
+     * @param model
+     */
+    private void commonProcess(String mode, Model model) {
+        mode = StringUtils.hasText(mode) ? mode : "step";
+        String pageTitle = "";
+        if (mode.equals("step")) {
+            pageTitle = utils.getMessage("당뇨_고위험군_테스트");
+
+        } else if (mode.equals("result")) {
+            pageTitle = utils.getMessage("당뇨_고위험군_테스트_결과");
+        }
+
+        model.addAttribute("pageTitle", pageTitle);
     }
 }
