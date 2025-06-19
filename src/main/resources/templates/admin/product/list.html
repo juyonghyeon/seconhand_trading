@@ -8,7 +8,7 @@
     <form name="frmSearch" method="get" th:action="@{/admin/product}" autocomplete="off" th:object="${productSearch}">
         <table class="table-cols">
             <tr>
-                <th width="80">상품상태</th>
+                <th width="150">상품상태</th>
                 <td>
                     <span th:each="stat : ${statusList}" class="checkbox">
                         <input type="checkbox" name="productStatus" th:value="${stat.name()}" th:id="${'productStatus-' + stat.name()}" th:field="*{productStatus}">
@@ -63,14 +63,20 @@
                 <td th:text="*{consumerPrice}" align="center"></td>
                 <td th:text="*{description}" align="center"></td>
                 <td>
-
+                    <select th:name="${'updateStatus_' + status.index}">
+                        <option th:each="stat : ${statusList}"
+                                th:value="${stat.name()}"
+                                th:selected="${stat == item.status}"
+                                th:text="${#messages.msg('productStatus.' + stat.name())}">
+                        </option>
+                    </select>
                 </td>
                 <td align="center">
                     <th:block th:if="*{deletedAt != null}">
                         <div class="badge" th:text="*{#strings.concat('삭제(', #temporals.format(deletedAt, 'yy.MM.dd HH:mm'),')')}"></div>
                         <span class="checkbox">
-                            <input type="checkbox" th:name="${'cancelDelete_' + status.index}" value="true" th:id="${'cancelDelete_' + status.index}">
-                            <label th:for="${'cancelDelete_' + status.index}">삭제 취소</label>
+                            <input type="checkbox" th:name="${'restore_' + status.index}" value="true" th:id="${'restore_' + status.index}">
+                            <label th:for="${'restore_' + status.index}">삭제 취소</label>
                         </span>
                     </th:block>
                 </td>

@@ -3,6 +3,7 @@ package org.koreait.product.services;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.exceptions.script.AlertException;
+import org.koreait.product.constants.ProductStatus;
 import org.koreait.product.entities.Product;
 import org.koreait.product.repositories.ProductRepository;
 import org.springframework.context.annotation.Lazy;
@@ -40,7 +41,7 @@ public class ProductManageService {
             } else {
                 boolean updateStatus = Boolean.parseBoolean(Objects.requireNonNull(request.getParameter("updateStatus_" + chk), "false"));
                 if (updateStatus) {
-                    product.setModifiedAt(LocalDateTime.now());
+                    product.setStatus(ProductStatus.valueOf(request.getParameter("updateStatus_" + chk)));
                 }
                 boolean restore = Boolean.parseBoolean(Objects.requireNonNull(request.getParameter("restore_" + chk), "false"));
                 if (restore) {
