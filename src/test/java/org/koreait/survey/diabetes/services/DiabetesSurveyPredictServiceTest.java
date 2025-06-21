@@ -42,7 +42,12 @@ public class DiabetesSurveyPredictServiceTest {
         form.setHypertension(false);
         form.setHeartDisease(false);
         form.setSmokingHistory(SmokingHistory.EVER);
-        form.setHeight();
+        form.setHeight(178.5);
         form.setWeight(120);
+        form.setHbA1c(8.2);
+        form.setBloodGlucoseLevel(126);
+
+        boolean result = service.isDiabetes(form);
+        System.out.println(result);
     }
 }
