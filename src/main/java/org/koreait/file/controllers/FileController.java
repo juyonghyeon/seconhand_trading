@@ -25,6 +25,11 @@ public class FileController {
         downloadService.process(seq);
     }
 
+    @GetMapping("/thumb")
+    public void thumb(RequestThumb form) {
+
+    }
+
 //    @GetMapping("/download/{seq}")
 //    public void download(@PathVariable("seq") Long seq) {
 //        response.setHeader("Content-Disposition", "attachment; filename=test.txt");
