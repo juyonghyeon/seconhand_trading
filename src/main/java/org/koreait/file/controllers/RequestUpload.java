@@ -8,4 +8,6 @@ public class RequestUpload {
     private String gid;
     private String location;
     private MultipartFile[] files;
+    private boolean single;
+    private boolean imageOnly;
 }
