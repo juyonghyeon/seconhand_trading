@@ -47,6 +47,15 @@ commonLib.fileManager = {
             formData.append("imageOnly", Boolean(imageOnly))
 
             // ajax로 파일 업로드 요청 처리
+            const { ajaxLoad } = commonLib;
+            ajaxLoad('/file/upload',(items) => {
+               // 성공시 후속 처리
+               console.log('items', items);
+            }, (err) => {
+                // 실패시 후속 처리
+                alert('파일 업로드에 실패하였습니다.');
+                console.error(err);
+            }, 'POST', formData)
 
         } catch (err) {
             console.error(err);
