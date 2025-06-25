@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class RequestThumb {
-    private Long seq;
+    private Long seq; // 파일 등록번호
     private int width;
     private int height;
-    private String url;
-
+    private boolean crop; // 크롭 여부
+    private String url; // 원격 이미지 URL
 }
