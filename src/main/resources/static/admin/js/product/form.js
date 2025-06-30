@@ -1,9 +1,11 @@
 window.addEventListener("DOMContentLoaded", function() {
+    // 에디터 로드
     const { editor } = commonLib;
-
-    // 위지윅 에디터 로드
     const gid = document.querySelector("input[name='gid']").value;
-    editor.load("#description", gid, "editor");
+    editor.load("#description", gid, "editor", (quill) => {
+        window.quill = quill;
+    });
+
 });
 
 /**
@@ -14,6 +16,8 @@ function fileUploadCallback(items) {
     if (!items || items.length === 0) return;
 
     const { fileManager } = commonLib;
+
+    console.log("items", items);
 
     // 메인 이미지
     const mainTarget = document.getElementById("main-images");
@@ -27,14 +31,15 @@ function fileUploadCallback(items) {
 
     // 이미지 업로드 시 치환될 템플릿
     const imageTpl = document.getElementById("image-tpl").innerHTML;
+    const editorTpl = document.getElementById("editor-tpl").innerHTML;
 
     const domParser = new DOMParser();
 
     for (const item of items) {
         let targetEl = null;
-        let html = imageTpl;
         const { seq, fileName, fileUrl } = item;
-         console.log("item", item);
+        let html = item.location === 'editor' ? editorTpl : imageTpl;
+
         switch (item.location) {
             case "main": // 메인 이미지
                 targetEl = mainTarget;
@@ -44,8 +49,12 @@ function fileUploadCallback(items) {
                 break;
             case "editor": // 에디터 이미지
                 targetEl = editorTarget;
-                // 에디터에 이미지 출력
 
+                // 업로드한 이미지를 에디터 첨부
+                if (quill) {
+                    const selIndex = quill.getSelection().index;
+                    quill.insertEmbed(selIndex, "image", fileUrl);
+                }
                 break;
         }
 
@@ -58,10 +67,11 @@ function fileUploadCallback(items) {
 
         html = html.replace(/\[seq\]/g, seq)
                     .replace(/\[imageUrl\]/g, imageUrl)
+                    .replace(/\[fileUrl\]/g, fileUrl)
                     .replace(/\[fileName\]/g, fileName);
 
         const dom = domParser.parseFromString(html, "text/html");
-        const el = dom.querySelector("div");
+        const el = dom.querySelector(item.location === 'editor' ? "span" : "div");
         targetEl.append(el);
 
         // 삭제 처리 버튼 처리

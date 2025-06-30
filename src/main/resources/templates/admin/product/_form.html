@@ -69,13 +69,11 @@
             <td>
                 <textarea id="description" name="description" th:field="*{description}"></textarea>
 
-                <button type="button" class="file-upload-btn sbtn blue" th:data-gid="*{gid}" data-location="editor" data-image-only="true"></button>
                 <div class="uploaded_images" id="editor-images"></div>
-
-                <div class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}"></div>
             </td>
         </tr>
     </table>
     <script th:replace="~{common/_file_tpl::image_tpl}"></script>
+    <script th:replace="~{common/_file_tpl::editor_tpl}"></script>
 </th:block>
 </html>

@@ -1,15 +1,11 @@
-var commonLib = commonLib ?? {};
+var commonLib = commonLib ?? {}
 
 commonLib.editor = {
     /**
     * 에디터 로드
     *
     */
-    load(selector, callback, gid, location) {
-        if (!Quill) {
-            return;
-        }
-
+    load(selector, gid, location, callback) {
         const toolbarOptions = [
           ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
           ['blockquote', 'code-block'],
@@ -36,28 +32,34 @@ commonLib.editor = {
                 toolbar: toolbarOptions
             },
             theme: 'snow',
-        });
+         });
 
-        window.quill = quill;
+         /* 툴바 이미지 버튼 클릭시 처리 */
+         const { fileManager } = commonLib;
+         const toolbar = quill.getModule('toolbar');
+         toolbar.addHandler('image', function() {
+            const fileEl = document.createElement("input");
+            fileEl.type = 'file';
+            fileEl.multiple = true;
+            fileEl.accept = 'image/*';
+            fileEl.click();
 
-
-        const toolbar = quill.getModule('toolbar');
-        toolbar.addHandler('image', function() {
-           const { fileManager } = commonLib;
-           const fileEl = document.createElement("input");
-           fileEl.type = 'file';
-           fileEl.multiple = true;
-           fileEl.click();
 
             fileEl.addEventListener("change", function() {
-                 const files = fileEl.files;
-                 fileManager.upload(files, gid, location, true);
+                const files = this.files;
+                fileManager.upload(files, gid, location, true);
             });
-
-        });
+         });
 
         if (typeof callback === 'function') {
             callback(quill);
         }
+    },
+    /**
+    * 에디터 이미지 추가
+    *
+    */
+    insertImage(quill, imageUrl) {
+        console.log(imageUrl);
     }
-};
+}
