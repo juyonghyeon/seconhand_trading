@@ -1,3 +1,11 @@
+window.addEventListener("DOMContentLoaded", function() {
+    const { editor } = commonLib;
+
+    // 위지윅 에디터 로드
+    const gid = document.querySelector("input[name='gid']").value;
+    editor.load("#description", gid, "editor");
+});
+
 /**
 * 파일 업로드 후속 처리
 *
@@ -14,6 +22,9 @@ function fileUploadCallback(items) {
     const listTarget = document.getElementById("list-images");
     listTarget.innerHTML = "";
 
+    // 에디터 이미지
+    const editorTarget = document.getElementById("editor-images");
+
     // 이미지 업로드 시 치환될 템플릿
     const imageTpl = document.getElementById("image-tpl").innerHTML;
 
@@ -22,6 +33,8 @@ function fileUploadCallback(items) {
     for (const item of items) {
         let targetEl = null;
         let html = imageTpl;
+        const { seq, fileName, fileUrl } = item;
+         console.log("item", item);
         switch (item.location) {
             case "main": // 메인 이미지
                 targetEl = mainTarget;
@@ -29,9 +42,14 @@ function fileUploadCallback(items) {
             case "list": // 목록 이미지
                 targetEl = listTarget;
                 break;
+            case "editor": // 에디터 이미지
+                targetEl = editorTarget;
+                // 에디터에 이미지 출력
+
+                break;
         }
 
-        const { seq, fileName } = item;
+
 
         let baseUrl = document.querySelector("meta[name='base_url']").content;
         baseUrl = baseUrl && baseUrl.lastIndexOf("/") !== -1 ? baseUrl.substring(0, baseUrl.lastIndexOf("/")) : baseUrl;
@@ -50,10 +68,32 @@ function fileUploadCallback(items) {
         const removeEl = el.querySelector(".remove");
         if (removeEl) {
             removeEl.addEventListener("click", function() {
-                alert('정말 삭제하겠습니까?', () => {
+                if (confirm("정말 삭제하겠습니까?")) {
                     fileManager.delete(seq);
-                });
+                }
             });
         }
+
+        // 전체 이미지 보기 클릭 처리
+        const showImageEl = el.querySelector(".show-image");
+        if (showImageEl) {
+            showImageEl.addEventListener("click", function() {
+                const { seq } = showImageEl.dataset;
+                fileManager.showImage(seq);
+            });
+
+        }
+    }
+}
+
+
+/**
+* 파일 삭제 성공시에 후속처리
+*
+*/
+function fileDeleteCallback({seq}) {
+    const el = document.getElementById(`file-${seq}`);
+    if (el) {
+        el.parentElement.removeChild(el);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class NewsTrendServiceTest {
 
     @Autowired
-    private NewsTrendService service;
+    private TrendCollectService service;
 
     @Test
     void test1() {

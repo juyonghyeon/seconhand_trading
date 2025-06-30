@@ -68,6 +68,10 @@
             <th width="120">상품설명</th>
             <td>
                 <textarea id="description" name="description" th:field="*{description}"></textarea>
+
+                <button type="button" class="file-upload-btn sbtn blue" th:data-gid="*{gid}" data-location="editor" data-image-only="true"></button>
+                <div class="uploaded_images" id="editor-images"></div>
+
                 <div class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}"></div>
             </td>
         </tr>
