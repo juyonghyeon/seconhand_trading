@@ -6,6 +6,19 @@ window.addEventListener("DOMContentLoaded", function() {
         window.quill = quill;
     });
 
+
+    // 업로드된 이미지 삭제 처리
+    const { fileManager } = commonLib;
+
+    const removeEls = document.querySelectorAll(".uploaded_images .remove");
+    removeEls.forEach(el => {
+        el.addEventListener("click", function() {
+            const { seq } = this.dataset;
+            if (confirm("정말 삭제하겠습니까?")) {
+                fileManager.delete(seq);
+            }
+        });
+    })
 });
 
 /**
