@@ -31,3 +31,9 @@ body {
 .top a:hover {
     text-decoration: underline;
 }
+
+
+body dl dt {
+    margin-left: 40px;
+    font-weight: bold;
+}

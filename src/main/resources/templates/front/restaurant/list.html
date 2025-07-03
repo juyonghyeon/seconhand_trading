@@ -3,6 +3,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 
+<th:block layout:fragment="addCommonScript">
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e5b92d42b15969021e6f0020012e0173"></script>
+</th:block>
 
 <main layout:fragment="content">
     <h1 th:text="${pageTitle}"></h1>
