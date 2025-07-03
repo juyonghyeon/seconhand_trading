@@ -62,7 +62,7 @@ public class RestaurantController {
         List<String> addCommonScript = new ArrayList<>();
 
         if (mode.equals("list")) {
-            pageTitle = utils.getMessage("오늘의_식당");
+            pageTitle = utils.getMessage("주위_식당");
             addCss.add("restaurant/list");
             addScript.add("restaurant/list");
             addCommonScript.add("map");

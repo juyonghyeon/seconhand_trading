@@ -9,7 +9,6 @@ commonLib.mapLib = {
             const scriptEl = document.createElement("script");
             scriptEl.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=e5b92d42b15969021e6f0020012e0173";
             scriptEl.id = "kakao-map-sdk";
-
             headEl.prepend(scriptEl);
 
             scriptEl.onload = () => {
