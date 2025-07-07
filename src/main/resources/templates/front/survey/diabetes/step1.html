@@ -25,7 +25,7 @@
         <dl>
             <dt th:text="#{나이}"></dt>
             <dd>
-                <input type="text" name="age" th:field="*{age}">
+                <input type="text" name="age" th:field="*{age}" class="textbox">
                 <div class="error" th:each="err : ${#fields.errors('age')}" th:text="${err}"></div>
             </dd>
         </dl>
@@ -66,7 +66,7 @@
         <dl>
             <dt th:text="#{흡연여부}"></dt>
             <dd>
-                <span th:each="item : ${smokingHistories}" th:if="${item.name() != 'NO_INFO'}">
+                <span th:each="item : ${smokingHistories}" th:if="${item.name() != 'No_INFO'}">
                     <input type="radio" name="smokingHistory" th:value="${item.name()}" th:field="*{smokingHistory}" th:id="${'smokingHistory-' + item.name()}">
                     <label th:for="${'smokingHistory-' + item.name()}" th:text="${#messages.msg('smokingHistory.' + item.name())}"></label>
                 </span>
@@ -75,7 +75,7 @@
             </dd>
         </dl>
 
-        <button type="submit" th:text="#{다음_페이지}"></button>
+        <button type="submit" th:text="#{다음_페이지}" class="btn" id="next"></button>
     </form>
 </main>
 </html>

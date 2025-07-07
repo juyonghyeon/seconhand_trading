@@ -31,7 +31,7 @@ public class DiabetesSurveyPredictService {
         String activationCommand = null, pythonPath = null;
         if (isProduction) { // 리눅스 환경, 서비스 환경
             activationCommand = String.format("%s/activate", properties.getBase2());
-            pythonPath = properties.getBase2() + "/python3";
+            pythonPath = properties.getBase2() + "/python";
         } else { // 윈도우즈 환경
             activationCommand = String.format("%s/activate.bat", properties.getBase2());
             pythonPath = properties.getBase2() + "/python.exe";
