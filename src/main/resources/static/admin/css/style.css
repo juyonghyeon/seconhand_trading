@@ -347,3 +347,30 @@ input[type='checkbox'] + label.standalone {
     width: 170px;
     margin-bottom: 10px;
 }
+
+form[name="frmSearch"] button[type="submit"] {
+    background-color: #fca8c8;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 1rem;
+}
+
+form[name="frmSearch"] button[type="submit"]:hover {
+    background-color: #f593b8;
+}
+
+.btn-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-wrapper button {
+    margin: 0 auto;
+}

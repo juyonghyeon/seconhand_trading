@@ -12,7 +12,9 @@
     <form name="frmSearch" method="get" th:object="${trendSearch}" autocomplete="off">
         사이트 주소 :
         <input type="text" name="siteUrl" th:field="*{siteUrl}">
-        <button type="submit">조회하기</button>
+        <div class="btn-wrapper">
+            <button type="submit">조회하기</button>
+        </div>
     </form>
     <th:block th:if="${json == null}">
         <div class="message">트렌드를 조회할 사이트 주소를 입력하세요.</div>
