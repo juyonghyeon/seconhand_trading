@@ -5,7 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.koreait.admin.global.controllers.CommonController;
 import org.koreait.file.constants.FileStatus;
 import org.koreait.file.services.FileInfoService;
+import org.koreait.global.search.ListData;
 import org.koreait.product.constants.ProductStatus;
+import org.koreait.product.controllers.ProductSearch;
+import org.koreait.product.entities.Product;
+import org.koreait.product.services.ProductInfoService;
 import org.koreait.product.services.ProductUpdateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +28,7 @@ import java.util.UUID;
 public class ProductController extends CommonController {
 
     private final ProductUpdateService updateService;
+    private final ProductInfoService infoService;
     private final FileInfoService fileInfoService;
 
 
@@ -45,8 +50,12 @@ public class ProductController extends CommonController {
 
     // 상품 목록
     @GetMapping({"", "/list"})
-    public String list(Model model) {
+    public String list(@ModelAttribute ProductSearch search, Model model) {
         commonProcess("list", model);
+
+        ListData<Product> data = infoService.getList(search);
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
 
         return "admin/product/list";
     }
@@ -65,6 +74,9 @@ public class ProductController extends CommonController {
     @GetMapping("/update/{seq}")
     public String update(@PathVariable("seq") Long seq, Model model) {
         commonProcess("update", model);
+
+        RequestProduct form = infoService.getForm(seq);
+        model.addAttribute("requestProduct", form);
 
         return "admin/product/update";
     }

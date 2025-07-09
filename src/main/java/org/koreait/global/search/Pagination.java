@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 @Getter
 @ToString
-public class Pagination {
+public class  Pagination {
 
     private int page;
     private int total;
