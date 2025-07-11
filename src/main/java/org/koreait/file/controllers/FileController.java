@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/file")
+@RequestMapping({"/api/file", "/file"})
 public class FileController {
     private final FileUploadService uploadService;
     private final FileDeleteService deleteService;
