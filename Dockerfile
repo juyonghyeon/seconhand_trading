@@ -1,4 +1,4 @@
-FROM juyonghyeon/ubuntu:1.0.0
+FROM juyonghyeon/ubuntu:1.0.2
 ARG JAR_PATH=build/libs/secondhand-0.0.1-SNAPSHOT.jar
 ARG PORT=3000
 COPY ${JAR_PATH} app.jar
