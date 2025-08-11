@@ -2,8 +2,8 @@
 
 
 
-# 당뇨 고위험군 진단 설문 서비스
-
+# [당뇨 고위험군 진단 설문 서비스](https://jyh.koreait.xyz/survey/diabetes)
+- 배포 사이트 주소 : https://jyh.koreait.xyz/survey/diabetes
 
 # 구현화면
 
